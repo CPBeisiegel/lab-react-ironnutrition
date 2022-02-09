@@ -1,24 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import 'bulma/css/bulma.css';
+import { useState } from 'react'; 
+
+import foods from './foods.json'; 
+import { FoodBox } from './components/Foodbox';
+ import {Search} from './components/Search';
+/*  import {AddFood} from './components/AddFood'; */
+
+
+
 
 function App() {
+
+  const [search, setSearch] = useState('')
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+
+      <h1 className="title">IronNutrition</h1>
+    
+     
+      <Search 
+        search={search}
+        setSearch={setSearch}
+        />
+
+      <FoodBox foods={
+        foods.filter(food => ((food.name)).toLowerCase()
+        .includes(search.toLowerCase()) 
+        )
+            
+        }/>
+       
+
+     {/*  <AddFood /> */}
     </div>
   );
 }
